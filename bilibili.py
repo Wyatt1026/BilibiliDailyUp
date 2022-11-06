@@ -88,7 +88,6 @@ class Bilibili :#line:23
         O0O00000O0O0O00OO =data .video_list_headers #line:153
         O0O00000O0O0O00OO ['cookie']=OO0OOOO00O0O00000 #line:154
         O0OO0000O00OO0OOO =OO0OOO00O00OOOO0O .session .get (url =api .get_video_list_url .format (random .choice (O00OOO0O0O00O000O )),headers =O0O00000O0O0O00OO ).json ()#line:156
-        utools .formate_print (O0OO0000O00OO0OOO )#line:157
         OOO0O000O00O00OO0 =O0OO0000O00OO0OOO ['data']['list']['vlist']#line:159
         return OOO0O000O00O00OO0 #line:160
     def __O0OO0OOO0O0OO00OO (OO0OO00OO00OO0O00 ,OOOOO00OO0O00O0O0 :str ,OOOOO0O0O0O00OOO0 :str )->None :#line:162
