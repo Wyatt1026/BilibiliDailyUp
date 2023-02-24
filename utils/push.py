@@ -1,18 +1,12 @@
-'''
-Author: ForMemRs
-Date: 2022-06-19 17:42:27
-LastEditors: ForMemRS
-LastEditTime: 2022-07-17 00:30:53
-FilePath: /bilibili_daily/push.py
-Blog: https://www.52pojie.cn/?1507943
-Copyright (c) 2022 by ForMemRs, All Rights Reserved.
-'''
+"""
+push the task info in social communication app
+"""
 
 import requests
 import json
 
 
-def pushplus(token, content, title='Bilibili助手提醒', template='markdown'):
+def pushplus_push(token, content, title='Bilibili助手提醒', template='markdown'):
     url = 'http://www.pushplus.plus/send'
     data = {
         "token": token,
@@ -26,6 +20,6 @@ def pushplus(token, content, title='Bilibili助手提醒', template='markdown'):
     print(response.text)
     if response.status_code == 200:
         return 1
-    return 0
+    return None
 
 
