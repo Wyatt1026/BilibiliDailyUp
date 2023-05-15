@@ -4,6 +4,7 @@ core function for scripts
 
 import requests
 import random
+import json
 import time
 
 from utils.data_f import print_f, time_f, random_video_para
@@ -127,7 +128,10 @@ class Bilibili:
         headers = self.post_data.video_list_headers.value
         headers['cookie'] = ck
         get_video_list_url = self.api.get_video_list_url.value.format(random.choice(uid_list))
-        video_res = self.session.get(url=get_video_list_url, headers=headers).json()
+        video_res = requests.get(url=get_video_list_url, headers=headers).text
+        if '过于频繁' in video_res:
+            video_res = video_res.replace('{"code":-509,"message":"请求过于频繁，请稍后再试","ttl":1}','')
+        video_res = json.loads(video_res)
         video_list = video_res['data']['list']['vlist']
         return video_list
 
