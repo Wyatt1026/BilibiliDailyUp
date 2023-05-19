@@ -32,6 +32,7 @@ class PostData(Enum):
     video_list_headers = {
         'authority': 'api.bilibili.com',
         'method': 'GET',
+        'path':'',
         'scheme':'https',
         'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
         'accept-language': 'zh-CN,zh;q=0.9',
