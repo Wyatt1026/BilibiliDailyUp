@@ -125,13 +125,16 @@ class Bilibili:
         """
         # uid_list = ['546195', '25876945', '287795639']
         uid_list = config.UID_LIST
+        random_uid = random.choice(uid_list)
         headers = self.post_data.video_list_headers.value
+        headers['path'] = '/x/space/wbi/arc/search?mid='+ random_uid
         headers['cookie'] = ck
-        get_video_list_url = self.api.get_video_list_url.value.format(random.choice(uid_list))
-        video_res = requests.get(url=get_video_list_url, headers=headers).text
-        if '过于频繁' in video_res:
-            video_res = video_res.replace('{"code":-509,"message":"请求过于频繁，请稍后再试","ttl":1}','')
-        video_res = json.loads(video_res)
+        get_video_list_url = self.api.get_video_list_url.value.format(random_uid)
+        video_res = self.session.get(url=get_video_list_url, headers=headers).json()
+        while video_res['code']!=0:
+            video_res = self.session.get(url=get_video_list_url, headers=headers).json()
+            print_f("获取video_list失败,延迟一秒重试")
+            time.sleep(1)
         video_list = video_res['data']['list']['vlist']
         return video_list
 
