@@ -10,7 +10,7 @@ class Api(Enum):
     coin_url = 'http://account.bilibili.com/site/getCoin'
     inquire_url = 'https://api.bilibili.com/x/member/web/exp/reward'
     # get_video_list_url = 'https://api.bilibili.com/x/space/arc/search?mid={}'
-    get_video_list_url = 'https://api.bilibili.com/x/space/wbi/arc/search?mid={}'
+    get_video_list_url = 'https://api.bilibili.com/x/space/wbi/arc/search?{}'
     watch_video_url = 'https://api.bilibili.com/x/click-interface/web/heartbeat'
     share_video_url = 'https://api.bilibili.com/x/web-interface/share/add'
     insert_coins_url = 'https://api.bilibili.com/x/web-interface/coin/add'

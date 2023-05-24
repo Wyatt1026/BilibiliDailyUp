@@ -8,6 +8,7 @@ import json
 import time
 
 from utils.data_f import print_f, time_f, random_video_para
+from utils.encrypt import get_query
 from utils.push import pushplus_push
 from utils.cookie_f import formate_cookie, get_csrf
 from config import config
@@ -127,12 +128,14 @@ class Bilibili:
         uid_list = config.UID_LIST
         random_uid = random.choice(uid_list)
         headers = self.post_data.video_list_headers.value
-        headers['path'] = '/x/space/wbi/arc/search?mid='+ random_uid
+        query = get_query(mid=random_uid, ps=30, pn=1)
+        headers['path'] = f'/x/space/wbi/arc/search?{query}'
         headers['cookie'] = ck
-        get_video_list_url = self.api.get_video_list_url.value.format(random_uid)
+        get_video_list_url = self.api.get_video_list_url.value.format(query)
         video_res = self.session.get(url=get_video_list_url, headers=headers).json()
         while video_res['code']!=0:
             video_res = self.session.get(url=get_video_list_url, headers=headers).json()
+            print(video_res)
             print_f("获取video_list失败,延迟一秒重试")
             time.sleep(1)
         video_list = video_res['data']['list']['vlist']
