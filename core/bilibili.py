@@ -133,11 +133,14 @@ class Bilibili:
         headers['cookie'] = ck
         get_video_list_url = self.api.get_video_list_url.value.format(query)
         video_res = self.session.get(url=get_video_list_url, headers=headers).json()
+        error_count = 0
         while video_res['code']!=0:
             video_res = self.session.get(url=get_video_list_url, headers=headers).json()
-            print(video_res)
             print_f("获取video_list失败,延迟一秒重试")
             time.sleep(1)
+            error_count += 1
+            if error_count == 10:
+                break
         video_list = video_res['data']['list']['vlist']
         return video_list
 
