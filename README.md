@@ -18,10 +18,6 @@
 - 银瓜子兑换硬币
 - 添加漫画签到功能
 
-## 目录
-
-[TOC]
-
 ## 使用说明
 
 ### 一、获取运行所需的 Cookies
@@ -47,9 +43,7 @@
 
 5.将上面复制值填入r"DedeUserID=xxxx; SESSDATA=xxxx; bili_jct=xxxx"，并填入配置文件`config/config.py`的`COOKIE_LIST `中。多个账号用，分割。形成一个列表
 
-![image-20230614112207694](\doc\README 1\image-20230614112207694.png)
-
-### 
+![image-20230614113231077](doc/image-20230614113231077.png)
 
 
 
@@ -71,7 +65,7 @@
 
    ![image-20230614112335207](doc/image-20230614112335207.png)
 
-4. 复制下SendKey，在后面需要使用。![image-20230610005516855](/img/image-20230610005516855.png)
+4. 复制下SendKey，在后面需要使用。
 
 5. 填入配置文件`config/config.py`的中
 
