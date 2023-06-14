@@ -37,8 +37,6 @@
 3. 按 F12 打开 「开发者工具」 找到 应用程序/Application -\> 存储 -\> Cookies
 4. 找到 `bili_jct` `SESSDATA` `DEDEUSERID` 三项，并复制值，后面需要用到。
 
-![图示](/20201012001307.png)
-
 ![image-20230614111857210](doc/image-20230614111857210.png)
 
 5.将上面复制值填入r"DedeUserID=xxxx; SESSDATA=xxxx; bili_jct=xxxx"，并填入配置文件`config/config.py`的`COOKIE_LIST `中。多个账号用，分割。形成一个列表
@@ -81,7 +79,7 @@
 
 #### 2.3 pushplus推送
 
-1. 访问PushPlus的官方网站（https://www.pushplus.plus/）并注册一个账号。
+1. 访问PushPlus的[官方网站](https://www.pushplus.plus/)并注册一个账号。
 2. 在注册成功后，登录PushPlus的控制台。
 3. 在控制台的左侧菜单中，选择“一对一推送”或“一对多推送”，根据您的需求选择推送类型。
 4. 在推送设置页面中，将看到一个名为“Token”的字段，这就是PushPlus的推送key。
