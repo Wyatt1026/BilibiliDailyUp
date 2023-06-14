@@ -14,12 +14,15 @@ from utils.cookie_f import formate_cookie, get_csrf
 from config import config
 from data.api import Api
 from data.post_data import PostData
+from utils.sever酱 import sever酱推送
+from utils.推送到企业微信应用 import 推送消息
+from utils.漫画签到 import 检查是否已签到, 漫画签到
 
 
 class Bilibili:
     """
-    The level upgrade scripts for Bilibili
-    you can earn 65 experience points per day
+    Bilibili的等级升级脚本
+    你每天可以获得65个经验值
     """
 
     def __init__(self) -> None:
@@ -30,20 +33,20 @@ class Bilibili:
 
     def __get_cookie_status(self, ck: str):
         """
-        Checking if a cookie is valid
+            检查cookie是否有效,正常返回0,无效返回1
         """
         cookie = formate_cookie(ck)
         coin_res = self.session.get(url=self.api.coin_url.value,
                                     cookies=cookie).json()
         code = coin_res['code']
         if code != 0:
-            # 0 is valid ，-101 is invalid
+            # 0有效，-101无效
             return 0
         return 1
 
     def __get_coin_num(self, ck: str) -> int:
         """
-        get the number of coin
+          获取硬币的数量,返回硬币的数量
         """
         cookie = formate_cookie(ck)
         res = self.session.get(
@@ -51,42 +54,59 @@ class Bilibili:
             cookies=cookie).json()
         money = res['data']['money']
         if money is None:
-            # the response is None when coins num is 0
+            # 当coins num为0时，响应为None
             return 0
         else:
             return money
 
     def __push_f(self, content: str):
         """
-        formate the push
+        构建推送数据的字符串
         """
         temp = f'{content}</br>'
         self.log = f'{self.log}{temp}'
 
     def __inquire_job(self, ck: str) -> tuple:
         """
-        Check if the task has been completed
+        检查任务是否已完成
+
+        参数:
+            ck (str): 用户的Cookie字符串
+
+        返回值:
+            tuple: 包含两个列表的元组，第一个列表是每日任务的完成情况，第二个列表是额外任务的完成情况
+
+
         """
+        # 格式化Cookie
         cookie = formate_cookie(ck)
+        # 发起请求，获取任务完成情况
         inquire_res = self.session.get(
             url=self.api.inquire_url.value, cookies=cookie).json()
+        # 提取每日任务的完成情况
+
+        # 打印inquire_res的所有内容
+        # print(inquire_res)
+
         login_job = inquire_res['data']['login']
         watch_job = inquire_res['data']['watch']
         coins_job = inquire_res['data']['coins']
         share_job = inquire_res['data']['share']
 
+        # 提取额外任务的完成情况
         email_job = inquire_res['data']['email']
         tel_job = inquire_res['data']['tel']
         safe_question_job = inquire_res['data']['safe_question']
         identify_card_job = inquire_res['data']['identify_card']
 
+        # 将每日任务和额外任务分别放入列表
         daily_job = [login_job, watch_job, coins_job, share_job]
         extra_job = [email_job, tel_job, safe_question_job, identify_card_job]
         return daily_job, extra_job
 
     def __get_info(self, ck: str) -> None:
         """
-        get userinfo
+        获取用户信息
         """
         cookie = formate_cookie(ck)
         info_res = self.session.get(url=self.api.info_url.value,
@@ -108,7 +128,7 @@ class Bilibili:
 
             self.__push_f(f"用户名:{name}</br>uid:{uid}</br>VIP:大会员</br>到期时间:{vip_due_data}"
                           f"</br>目前的等级:{level}级</br>目前的经验:{current_exp}</br>离下个等\
-                               级:{sub_exp}经验<br>距升级还差:{up_days}天</br>剩余硬币数:{coin_num}个")
+                               级:{sub_exp}经验</br>距升级还差:{up_days}天</br>剩余硬币数:{coin_num}个")
 
             print_f(info_content)
         else:
@@ -122,7 +142,7 @@ class Bilibili:
 
     def __get_video_list(self, ck) -> list:
         """
-        the sign coin video list
+        投币视频列表
         """
         # uid_list = ['546195', '25876945', '287795639']
         uid_list = config.UID_LIST
@@ -146,7 +166,7 @@ class Bilibili:
 
     def __watch_video(self, bvid: str, ck: str) -> None:
         """
-        watch video task
+        看视频任务
         """
         watch_time = random.randint(30, 60)
         watch_video_data = self.post_data.watch_video_data.value
@@ -165,7 +185,7 @@ class Bilibili:
 
     def __share_video(self, bvid: str, ck: str) -> None:
         """
-        share video task
+        分享视频任务
         """
         share_video_data = self.post_data.share_video_data.value
         share_video_data['bvid'] = bvid
@@ -213,6 +233,10 @@ class Bilibili:
         return coin_res
 
     def __do_live_sign(self, ck: str) -> None:
+        """
+        直播任务
+        """
+
         res = self.session.get(url=self.api.live_sign_url.value,
                                cookies=formate_cookie(ck)).json()
         if res['code'] == 0:
@@ -227,7 +251,7 @@ class Bilibili:
 
     def __inquire_live_info(self, ck: str) -> bool:
         """
-        return the silver num
+        返回银瓜子数量
         """
         res = self.session.get(url=self.api.live_info_url.value,
                                cookies=formate_cookie(ck)).json()
@@ -238,6 +262,7 @@ class Bilibili:
         return False
 
     def __do_silver2coin(self, ck: str) -> None:
+        """银瓜子换硬币"""
         silver_data = self.post_data.silver2coin_data.value
         csrf_value = get_csrf(ck)
         silver_data['csrf'] = csrf_value
@@ -303,7 +328,7 @@ class Bilibili:
 
     def __do_job(self, ck: str) -> None:
         """
-        work function
+        开始执行任务,执行所有任务的函数
         """
         cookie_status = self.__get_cookie_status(ck)
         if cookie_status:
@@ -390,9 +415,24 @@ class Bilibili:
             else:
                 self.__push_f('银瓜子转换币:跳过~')
                 print_f('银瓜子兑换:跳过~')
+
+            self.__push_f('=========漫画签到情况========')
+            print_f('=========漫画签到情况=========')
+            if not 检查是否已签到(ck):
+                if 漫画签到(ck):
+                    print_f("漫画签到:已完成~")
+                    self.__push_f("漫画签到:已完成~")
+                else:
+                    print_f("漫画签到失败")
+                    self.__push_f("漫画签到失败")
+            else:
+                print_f("漫画签到:当天已签到~")
+                self.__push_f("漫画签到:当天已签到~")
+
             self.__push_f('=========以下是个人信息=========')
             print_f('=========以下是个人信息=========')
             self.__get_info(ck)
+
         else:
             print_f('cookie已失效,任务停止,请更换新的cookie!')
             self.__push_f('cookie已失效,任务停止,请更换新的cookie!')
@@ -410,3 +450,8 @@ class Bilibili:
             time.sleep(1)
         if config.PUSH_OR_NOT:
             pushplus_push(config.TOKEN, self.log)
+        if config.企业ID != "" and config.企业应用secret != "" and config.企业应用的id != "":
+            #下面第一个参数,使用字符串的 replace() 方法来替换字符串中的 </br> 为换行符 \n。
+            推送消息(self.log.replace("</br>", "\n"),config.企业ID, config.企业应用secret, config.企业应用的id)
+        if config.推送到sever酱key!="":
+            sever酱推送(self.log.replace("</br>", "\n"),config.推送到sever酱key)
