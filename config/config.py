@@ -25,9 +25,24 @@ UID_LIST = ['473837611', '1131457022', '433587902', '2026561407', '50329118']
 # 获取UID的方法见README.md
 # 新华网 人民日报 央视频  王冰冰 英雄联盟赛事
 
-COOKIE_LIST = [r""]
+COOKIE_LIST = [
+    # 示例，以分号+空格分割，否则会出错
+    # r"DedeUserID=xxxx; SESSDATA=xxxx; bili_jct=xxxx",
+               ]
 # Bilibili的COOKIE获取的方法见README.md 支持多账号
 
 PUSH_OR_NOT = False
 TOKEN = ''
 # PUSH PLUS的TOKEN 官网为https://www.pushplus.plus
+
+
+企业ID=""
+企业应用secret=""
+企业应用的id=""
+# 是否开启企业微信推送,均有填写则推送
+# 企业应用推送 文档https://developer.work.weixin.qq.com/document/path/90236
+
+
+推送到sever酱key=""
+# 是否开启sever酱,有填写则推送,空字符串则不推送 https://sct.ftqq.com/sendkey获取key
+
