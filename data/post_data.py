@@ -28,6 +28,10 @@ class PostData(Enum):
         'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36',
 
     }
+    comics_sign_header = {
+        "Cookie": '',
+        "Content-Type": "application/x-www-form-urlencoded"
+    }
 
     video_list_headers = {
         'authority': 'api.bilibili.com',
@@ -67,4 +71,7 @@ class PostData(Enum):
     silver2coin_data = {
         'csrf_token': '',
         'csrf': ''
+    }
+    comics_sign_data = {
+        "platform": "android"
     }
