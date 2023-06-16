@@ -386,7 +386,7 @@ class Bilibili:
                     self.__push_f("漫画签到: 完成~")
                 else:
                     print_f("漫画签到: 失败~")
-                    self.__push_f("漫画签到: 完成~")
+                    self.__push_f("漫画签到: 失败~")
             self.__push_f('=========以下是个人信息=========')
             print_f('=========以下是个人信息=========')
             self.__get_info(ck)
