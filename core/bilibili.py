@@ -272,9 +272,10 @@ class Bilibili:
         res = self.session.post(url = self.api.comics_check_url.value,
                                 headers=comics_header,
                                 cookies=cookie).json()
+        print_f(res)
         if res['data']['status'] ==0:
-            return True
-        return False
+            return False
+        return True
 
     def comics_sign_task(self,ck):
         comics_header = self.post_data.comics_sign_header.value
