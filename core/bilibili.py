@@ -87,8 +87,7 @@ class Bilibili:
         vip_due_data = info_res['data']['vip']['due_date']
         vip_due_data = time_f(vip_due_data)
         if vip_status:
-            info_content = f"""用户{name},uid为{uid}您是大会员,大会员到期时间为{vip_due_data},你目前的等级是{level}级,
-                        目前的经验{current_exp},离下个等级还差{sub_exp}经验,需要{up_days}天剩余硬币还有{coin_num}个"""
+            info_content = f"""用户{name},uid为{uid}您是大会员,大会员到期时间为{vip_due_data},你目前的等级是{level}级,目前的经验{current_exp},离下个等级还差{sub_exp}经验,需要{up_days}天剩余硬币还有{coin_num}个"""
 
             self.__push_f(f"用户名:{name}</br>uid:{uid}</br>VIP:大会员</br>到期时间:{vip_due_data}"
                           f"</br>目前的等级:{level}级</br>目前的经验:{current_exp}</br>离下个等\
@@ -96,8 +95,7 @@ class Bilibili:
 
             print_f(info_content)
         else:
-            info_content = f"""用户{name},uid为{uid}您的大会员已过期,过期时间为{vip_due_data},你目前的等级是{level}级,
-            目前的经验{current_exp},离下个等级还差{sub_exp}经验,需要{up_days}天,剩余硬币还有{coin_num}个"""
+            info_content = f"""用户{name},uid为{uid}您的大会员已过期,过期时间为{vip_due_data},你目前的等级是{level}级,目前的经验{current_exp},离下个等级还差{sub_exp}经验,需要{up_days}天,剩余硬币还有{coin_num}个"""
 
             self.__push_f(f"用户名:{name}</br>uid:{uid}</br>VIP:非大会员</br>过期时间:{vip_due_data}</br>目"
                           f"前的等级:{level}级</br>目前的经验:{current_exp}</br>离下个等级:{sub_exp}经验<br>距升级还差:{up_days}天</br>剩余硬币数:{coin_num}个")
@@ -134,7 +132,6 @@ class Bilibili:
         watch_video_res = self.session.post(
             url=self.api.watch_video_url.value, data=watch_video_data, cookies=cookie).json()
         code = watch_video_res['code']
-        # self.__utools.formate_print(watch_video_res)
         if code == 0:
             print_f('看视频完成')
         else:
