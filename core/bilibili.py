@@ -5,6 +5,7 @@ core function for scripts
 import requests
 import random
 import time
+import os
 
 from utils.data_f import print_f, time_f, random_video_para
 from utils.encrypt import get_query
@@ -397,12 +398,16 @@ class Bilibili:
         """
         Entrance function
         """
-        print_f(f'成功添加{len(config.COOKIE_LIST)}个cookie,开始任务……')
-        for index, ck in enumerate(config.COOKIE_LIST):
-            self.__push_f(f'=========这是第{index + 1}个账号=========')
-            print_f(f'正在签到第{index + 1}个账号……')
-            self.__do_job(ck)
-            time.sleep(1)
+        if config.USE_ENVIRONMENT_VARIABLE:
+            print_f('从环境变量中读取CK')
+            self.__do_job(os.environ['BILIBILI'])
+        else:
+            print_f(f'成功添加{len(config.COOKIE_LIST)}个cookie,开始任务……')
+            for index, ck in enumerate(config.COOKIE_LIST):
+                self.__push_f(f'=========这是第{index + 1}个账号=========')
+                print_f(f'正在签到第{index + 1}个账号……')
+                self.__do_job(ck)
+                time.sleep(1)
         if config.PUSH_OR_NOT:
             pushplus_push(config.TOKEN, self.log)
 
