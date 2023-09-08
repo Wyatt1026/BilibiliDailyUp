@@ -400,7 +400,11 @@ class Bilibili:
         """
         if config.USE_ENVIRONMENT_VARIABLE:
             print_f('从环境变量中读取CK')
-            self.__do_job(os.environ['BILIBILI'])
+            bilibili_ck = os.environ.get('BILIBILI')
+            if not bilibili_ck:
+                print_f("未设置BILIBILI这个环境变量 任务终止")
+                return
+            self.__do_job(bilibili_ck)
         else:
             print_f(f'成功添加{len(config.COOKIE_LIST)}个cookie,开始任务……')
             for index, ck in enumerate(config.COOKIE_LIST):
