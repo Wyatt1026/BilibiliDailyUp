@@ -3,18 +3,18 @@ formate the cookies from the user input in config/config.py
 """
 
 
-def formate_cookie(cookie: str):
+def format_cookie(cookie: str) -> dict:
     """
-    formate the cookie from string to dict
+    Format the cookie from string to dict.
     """
-    cookie_dict = dict([l.split("=", 1) for l in cookie.split("; ")])
-    return cookie_dict
+    return {k: v for k, v in (item.split("=", 1) for item in cookie.split("; "))}
+
 
 
 def get_csrf(ck: str) -> str:
     """
     get the csrf value from cookie
     """
-    cookie_dict = formate_cookie(ck)
+    cookie_dict = format_cookie(ck)
     csrf = cookie_dict['bili_jct']
     return csrf

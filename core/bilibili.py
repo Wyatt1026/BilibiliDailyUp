@@ -10,7 +10,7 @@ import os
 from utils.data_f import print_f, time_f, random_video_para
 from utils.encrypt import get_query
 from utils.push import pushplus_push,wechat_push,sever_push
-from utils.cookie_f import formate_cookie, get_csrf
+from utils.cookie_f import format_cookie, get_csrf
 from config import config
 from data.api import Api
 from data.post_data import PostData
@@ -30,7 +30,7 @@ class Bilibili:
         self.api = Api
 
     def __get_cookie_status(self, ck: str):
-        cookie = formate_cookie(ck)
+        cookie = format_cookie(ck)
         coin_res = self.session.get(url=self.api.coin_url.value,
                                     cookies=cookie).json()
         code = coin_res['code']
@@ -40,7 +40,7 @@ class Bilibili:
         return 1
 
     def __get_coin_num(self, ck: str) -> int:
-        cookie = formate_cookie(ck)
+        cookie = format_cookie(ck)
         res = self.session.get(
             url=self.api.coin_url.value, headers=self.post_data.headers.value,
             cookies=cookie).json()
@@ -55,7 +55,7 @@ class Bilibili:
         self.log = f'{self.log}{temp}'
 
     def __inquire_job(self, ck: str) -> tuple:
-        cookie = formate_cookie(ck)
+        cookie = format_cookie(ck)
         inquire_res = self.session.get(
             url=self.api.inquire_url.value, cookies=cookie).json()
         login_job = inquire_res['data']['login']
@@ -73,7 +73,7 @@ class Bilibili:
         return daily_job, extra_job
 
     def __get_info(self, ck: str) -> None:
-        cookie = formate_cookie(ck)
+        cookie = format_cookie(ck)
         info_res = self.session.get(url=self.api.info_url.value,
                                     cookies=cookie).json()
         uid = info_res['data']['mid']
@@ -129,7 +129,7 @@ class Bilibili:
         watch_video_data['bvid'] = bvid
         watch_video_data['played_time'] = str(watch_time)
         watch_video_data['csrf'] = get_csrf(ck)
-        cookie = formate_cookie(ck)
+        cookie = format_cookie(ck)
         watch_video_res = self.session.post(
             url=self.api.watch_video_url.value, data=watch_video_data, cookies=cookie).json()
         code = watch_video_res['code']
@@ -142,7 +142,7 @@ class Bilibili:
         share_video_data = self.post_data.share_video_data.value
         share_video_data['bvid'] = bvid
         share_video_data['csrf'] = get_csrf(ck)
-        cookie = formate_cookie(ck)
+        cookie = format_cookie(ck)
         share_video_res = self.session.post(
             url=self.api.share_video_url.value, data=share_video_data, cookies=cookie,
             headers=self.post_data.headers.value).json()
@@ -154,7 +154,7 @@ class Bilibili:
             print_f('分享视频失败')
 
     def __insert_coin(self, aid: str, ck: str) -> int:
-        cookie = formate_cookie(ck)
+        cookie = format_cookie(ck)
         insert_coin_data = self.post_data.insert_coin_data.value
         insert_coin_headers = self.post_data.insert_coin_headers.value
         insert_coin_data['aid'] = aid
@@ -180,7 +180,7 @@ class Bilibili:
 
     def __do_live_sign(self, ck: str) -> None:
         res = self.session.get(url=self.api.live_sign_url.value,
-                               cookies=formate_cookie(ck)).json()
+                               cookies=format_cookie(ck)).json()
         if res['code'] == 0:
             text = res['data']['text']
             sign_days = res['data']['hadSignDays']
@@ -193,7 +193,7 @@ class Bilibili:
 
     def __inquire_live_info(self, ck: str) -> bool:
         res = self.session.get(url=self.api.live_info_url.value,
-                               cookies=formate_cookie(ck)).json()
+                               cookies=format_cookie(ck)).json()
         self.__push_f(f'银瓜子数量:{res["data"]["silver"]}')
         print_f(f'银瓜子数量:{res["data"]["silver"]}')
         if res['data']['silver'] > 700:
@@ -206,7 +206,7 @@ class Bilibili:
         silver_data['csrf'] = csrf_value
         silver_data['csrf_token'] = csrf_value
         res = self.session.post(url=self.api.silver2coin_url.value,
-                                cookies=formate_cookie(ck), data=silver_data).json()
+                                cookies=format_cookie(ck), data=silver_data).json()
         if res['code'] == 0:
             silver = res['data']['silver']
             print_f('银瓜子兑换:成功!')
@@ -264,7 +264,7 @@ class Bilibili:
         self.__share_video(bvid, ck)
 
     def check_comics_sign(self,ck):
-        cookie = formate_cookie(ck)
+        cookie = format_cookie(ck)
         comics_header = self.post_data.comics_sign_header.value
         comics_header['Cookie'] = ck
         res = self.session.post(url = self.api.comics_check_url.value,
@@ -277,7 +277,7 @@ class Bilibili:
     def comics_sign_task(self,ck):
         comics_header = self.post_data.comics_sign_header.value
         comics_header['Cookie'] = ck
-        cookie = formate_cookie(ck)
+        cookie = format_cookie(ck)
         res = self.session.post(self.api.comics_sign_url.comics_sign_url.value,
                                      headers=comics_header,
                                      data=self.post_data.comics_sign_data.value,
