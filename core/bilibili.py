@@ -8,12 +8,12 @@ import time
 import os
 
 from utils.data_f import print_f, time_f, random_video_para
-from utils.encrypt import get_query
 from utils.push import pushplus_push,wechat_push,sever_push
 from utils.cookie_f import format_cookie, get_csrf
+from data.post_data import PostData
+from utils.encrypt import get_query
 from config import config
 from data.api import Api
-from data.post_data import PostData
 
 
 
