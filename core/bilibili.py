@@ -160,6 +160,8 @@ class Bilibili:
         insert_coin_data['aid'] = aid
         insert_coin_data['csrf'] = get_csrf(ck)
         insert_coin_headers['cookie'] = ck
+        if not config.LIKE_OR_NOT:
+            insert_coin_data['select_like'] = 0
         insert_coin_res = self.session.post(
             url=self.api.insert_coins_url.value, headers=insert_coin_headers,
             data=insert_coin_data, cookies=cookie).json()
