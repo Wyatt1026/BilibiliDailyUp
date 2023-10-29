@@ -194,7 +194,7 @@ class Bilibili:
             self.__push_f('直播签到:当天已签到')
 
     def __inquire_live_info(self, ck: str) -> bool:
-        res = self.session.get(url=self.api.live_info_url.value,
+        res = self.session.get(url=self.api.live_info_url.value,headers=self.post_data.headers.value,
                                cookies=format_cookie(ck)).json()
         self.__push_f(f'银瓜子数量:{res["data"]["silver"]}')
         print_f(f'银瓜子数量:{res["data"]["silver"]}')
