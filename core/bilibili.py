@@ -8,13 +8,12 @@ import time
 import os
 
 from utils.data_f import print_f, time_f, random_video_para
-from utils.push import pushplus_push,wechat_push,sever_push
+from utils.push import pushplus_push, wechat_push, sever_push
 from utils.cookie_f import format_cookie, get_csrf
 from data.post_data import PostData
 from utils.encrypt import get_query
 from config import config
 from data.api import Api
-
 
 
 class Bilibili:
@@ -57,7 +56,7 @@ class Bilibili:
     def __inquire_job(self, ck: str) -> tuple:
         cookie = format_cookie(ck)
         inquire_res = self.session.get(
-            url=self.api.inquire_url.value, cookies=cookie).json()
+            url=self.api.inquire_url.value, headers=self.post_data.headers.value, cookies=cookie).json()
         login_job = inquire_res['data']['login']
         watch_job = inquire_res['data']['watch']
         coins_job = inquire_res['data']['coins']
@@ -74,7 +73,7 @@ class Bilibili:
 
     def __get_info(self, ck: str) -> None:
         cookie = format_cookie(ck)
-        info_res = self.session.get(url=self.api.info_url.value,
+        info_res = self.session.get(url=self.api.info_url.value, headers=self.post_data.headers.value,
                                     cookies=cookie).json()
         uid = info_res['data']['mid']
         name = info_res['data']['name']
@@ -113,7 +112,7 @@ class Bilibili:
         get_video_list_url = self.api.get_video_list_url.value.format(query)
         video_res = self.session.get(url=get_video_list_url, headers=headers).json()
         error_count = 0
-        while video_res['code']!=0:
+        while video_res['code'] != 0:
             video_res = self.session.get(url=get_video_list_url, headers=headers).json()
             print_f("获取video_list失败,延迟一秒重试")
             time.sleep(1)
@@ -194,7 +193,7 @@ class Bilibili:
             self.__push_f('直播签到:当天已签到')
 
     def __inquire_live_info(self, ck: str) -> bool:
-        res = self.session.get(url=self.api.live_info_url.value,headers=self.post_data.headers.value,
+        res = self.session.get(url=self.api.live_info_url.value, headers=self.post_data.headers.value,
                                cookies=format_cookie(ck)).json()
         self.__push_f(f'银瓜子数量:{res["data"]["silver"]}')
         print_f(f'银瓜子数量:{res["data"]["silver"]}')
@@ -259,35 +258,34 @@ class Bilibili:
             self.__push_f(f'每日投币:完成~获得{coin_count * 10}点经验值')
             return coin_num
 
-    def share_video_task(self,ck):
+    def share_video_task(self, ck):
         video_list = self.__get_video_list(ck)
         bvid, title, author, aid = random_video_para(video_list)
         print_f(f'开始分享{author}的视频{title}……')
         self.__share_video(bvid, ck)
 
-    def check_comics_sign(self,ck):
+    def check_comics_sign(self, ck):
         cookie = format_cookie(ck)
         comics_header = self.post_data.comics_sign_header.value
         comics_header['Cookie'] = ck
-        res = self.session.post(url = self.api.comics_check_url.value,
+        res = self.session.post(url=self.api.comics_check_url.value,
                                 headers=comics_header,
                                 cookies=cookie).json()
-        if res['data']['status'] ==0:
+        if res['data']['status'] == 0:
             return False
         return True
 
-    def comics_sign_task(self,ck):
+    def comics_sign_task(self, ck):
         comics_header = self.post_data.comics_sign_header.value
         comics_header['Cookie'] = ck
         cookie = format_cookie(ck)
         res = self.session.post(self.api.comics_sign_url.comics_sign_url.value,
-                                     headers=comics_header,
-                                     data=self.post_data.comics_sign_data.value,
-                                     cookies=cookie).json()
-        if res['code'] ==0:
+                                headers=comics_header,
+                                data=self.post_data.comics_sign_data.value,
+                                cookies=cookie).json()
+        if res['code'] == 0:
             return True
         return False
-
 
     def __do_job(self, ck: str) -> None:
         cookie_status = self.__get_cookie_status(ck)
