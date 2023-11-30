@@ -106,7 +106,7 @@ class Bilibili:
         uid_list = config.UID_LIST
         random_uid = random.choice(uid_list)
         headers = self.post_data.video_list_headers.value
-        query = get_query(mid=random_uid, ps=30, pn=1)
+        query = get_query(ck=ck,mid=random_uid, ps=30, pn=1)
         headers['path'] = f'/x/space/wbi/arc/search?{query}'
         headers['cookie'] = ck
         get_video_list_url = self.api.get_video_list_url.value.format(query)
@@ -294,10 +294,8 @@ class Bilibili:
             print_f('cookie有效即将开始查询任务……')
             print_f('=========以下是任务信息=========')
             self.__push_f('=========以下是任务信息=========')
-            # self.__get_info()
             inquire_job_res = self.__inquire_job(ck)
             daily_job, extra_job = inquire_job_res
-
             for index, job in enumerate(daily_job):
                 if index == 0:
                     print_f('登录任务已完成') if job else print_f('登录任务未完成')

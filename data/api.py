@@ -6,6 +6,7 @@ from enum import Enum
 
 
 class Api(Enum):
+    nav_url = 'https://api.bilibili.com/x/web-interface/nav'
     info_url = 'http://api.bilibili.com/x/space/myinfo'
     coin_url = 'http://account.bilibili.com/site/getCoin'
     inquire_url = 'https://api.bilibili.com/x/member/web/exp/reward'

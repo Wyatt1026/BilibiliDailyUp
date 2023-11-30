@@ -1,3 +1,6 @@
+from data.post_data import PostData
+from data.api import Api
+
 from functools import reduce
 from hashlib import md5
 import urllib.parse
@@ -11,30 +14,35 @@ mixinKeyEncTab = [
     36, 20, 34, 44, 52
 ]
 
-def getMixinKey(orig: str):
+
+def get_mixed_key(orig: str):
     '对 imgKey 和 subKey 进行字符顺序打乱编码'
     return reduce(lambda s, i: s + orig[i], mixinKeyEncTab, '')[:32]
 
-def encWbi(params: dict, img_key: str, sub_key: str):
+
+def enc_wbi(params: dict, img_key: str, sub_key: str):
     '为请求参数进行 wbi 签名'
-    mixin_key = getMixinKey(img_key + sub_key)
+    mixin_key = get_mixed_key(img_key + sub_key)
     curr_time = round(time.time())
-    params['wts'] = curr_time                                   # 添加 wts 字段
-    params = dict(sorted(params.items()))                       # 按照 key 重排参数
+    params['wts'] = curr_time  # 添加 wts 字段
+    params = dict(sorted(params.items()))  # 按照 key 重排参数
     # 过滤 value 中的 "!'()*" 字符
     params = {
-        k : ''.join(filter(lambda chr: chr not in "!'()*", str(v)))
+        k: ''.join(filter(lambda chr: chr not in "!'()*", str(v)))
         for k, v
         in params.items()
     }
-    query = urllib.parse.urlencode(params)                      # 序列化参数
-    wbi_sign = md5((query + mixin_key).encode()).hexdigest()    # 计算 w_rid
+    query = urllib.parse.urlencode(params)  # 序列化参数
+    wbi_sign = md5((query + mixin_key).encode()).hexdigest()  # 计算 w_rid
     params['w_rid'] = wbi_sign
     return params
 
-def getWbiKeys() :
+
+def get_wbi_keys(ck):
     '获取最新的 img_key 和 sub_key'
-    resp = requests.get('https://api.bilibili.com/x/web-interface/nav')
+    headers = PostData.para_headers.value
+    headers['cookie'] = ck
+    resp = requests.get(url=Api.nav_url.value, headers=headers)
     resp.raise_for_status()
     json_content = resp.json()
     img_url: str = json_content['data']['wbi_img']['img_url']
@@ -44,12 +52,12 @@ def getWbiKeys() :
     return img_key, sub_key
 
 
-def get_query(**parameters: dict):
+def get_query(ck: str, **parameters: dict):
     """
     获取签名后的查询参数
     """
-    img_key, sub_key = getWbiKeys()
-    signed_params = encWbi(
+    img_key, sub_key = get_wbi_keys(ck)
+    signed_params = enc_wbi(
         params=parameters,
         img_key=img_key,
         sub_key=sub_key
