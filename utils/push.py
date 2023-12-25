@@ -24,18 +24,17 @@ def pushplus_push(token, content, title='Bilibili助手提醒', template='markdo
 
 
 def sever_push(msg, token):
-   data = {
-       "title": "Bilibili助手提醒",
-       "desp": msg
-   }
-   headers = {
-       "Content-Type": "application/json;charset=utf-8"
-   }
-   res = requests.post(url = f"https://sctapi.ftqq.com/{token}.send",
-                       headers=headers,
-                       data=json.dumps(data)).json()
-   print(res)
-
+    data = {
+        "title": "Bilibili助手提醒",
+        "desp": msg
+    }
+    headers = {
+        "Content-Type": "application/json;charset=utf-8"
+    }
+    res = requests.post(url=f"https://sctapi.ftqq.com/{token}.send",
+                        headers=headers,
+                        data=json.dumps(data)).json()
+    print(res)
 
 
 def wechat_push(msg, wechat_id, wechat_app_secret, wechat_app_id):
@@ -58,13 +57,13 @@ def wechat_push(msg, wechat_id, wechat_app_secret, wechat_app_id):
         access_token = access_token_res["access_token"]
         send_url = f"https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={access_token}"
         if len(msg) <= 1024:
-            send_res = requests.post(url = send_url,
-                                         headers=send_headers,
-                                         data=json.dumps(send_data))
+            send_res = requests.post(url=send_url,
+                                     headers=send_headers,
+                                     data=json.dumps(send_data))
             print(send_res.json())
         else:
             # 消息超过1024个字符，分多次发送
-            split_msg = [msg[i:i+1024] for i in range(0, len(msg), 1024)]
+            split_msg = [msg[i:i + 1024] for i in range(0, len(msg), 1024)]
             for msgs in split_msg:
                 send_data["text"]["content"] = msgs
                 res = requests.post(url=send_url,
@@ -72,5 +71,3 @@ def wechat_push(msg, wechat_id, wechat_app_secret, wechat_app_id):
                                     data=json.dumps(send_data)
                                     )
                 print(res)
-
-

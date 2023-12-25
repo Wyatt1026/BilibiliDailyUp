@@ -2,8 +2,7 @@
 formate the cookies from the user input in config/config.py
 """
 
-
-def format_cookie(cookie: str) -> dict:
+def format_ck(cookie: str) -> dict:
     """
     Format the cookie from string to dict.
     """
@@ -15,6 +14,7 @@ def get_csrf(ck: str) -> str:
     """
     get the csrf value from cookie
     """
-    cookie_dict = format_cookie(ck)
+    cookie_dict = format_ck(ck)
     csrf = cookie_dict['bili_jct']
     return csrf
+

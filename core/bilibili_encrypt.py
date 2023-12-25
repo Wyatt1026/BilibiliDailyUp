@@ -16,30 +16,26 @@ mixinKeyEncTab = [
 
 
 def get_mixed_key(orig: str):
-    '对 imgKey 和 subKey 进行字符顺序打乱编码'
     return reduce(lambda s, i: s + orig[i], mixinKeyEncTab, '')[:32]
 
 
 def enc_wbi(params: dict, img_key: str, sub_key: str):
-    '为请求参数进行 wbi 签名'
     mixin_key = get_mixed_key(img_key + sub_key)
     curr_time = round(time.time())
-    params['wts'] = curr_time  # 添加 wts 字段
-    params = dict(sorted(params.items()))  # 按照 key 重排参数
-    # 过滤 value 中的 "!'()*" 字符
+    params['wts'] = curr_time
+    params = dict(sorted(params.items()))
     params = {
         k: ''.join(filter(lambda chr: chr not in "!'()*", str(v)))
         for k, v
         in params.items()
     }
-    query = urllib.parse.urlencode(params)  # 序列化参数
-    wbi_sign = md5((query + mixin_key).encode()).hexdigest()  # 计算 w_rid
+    query = urllib.parse.urlencode(params)
+    wbi_sign = md5((query + mixin_key).encode()).hexdigest()
     params['w_rid'] = wbi_sign
     return params
 
 
 def get_wbi_keys(ck):
-    '获取最新的 img_key 和 sub_key'
     headers = PostData.para_headers.value
     headers['cookie'] = ck
     resp = requests.get(url=Api.nav_url.value, headers=headers)
@@ -53,9 +49,6 @@ def get_wbi_keys(ck):
 
 
 def get_query(ck: str, **parameters: dict):
-    """
-    获取签名后的查询参数
-    """
     img_key, sub_key = get_wbi_keys(ck)
     signed_params = enc_wbi(
         params=parameters,

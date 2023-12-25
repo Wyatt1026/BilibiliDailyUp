@@ -85,7 +85,7 @@ class PostData(Enum):
         'cross_domain': 'true',
         'csrf': ''
     }
-    silver2coin_data = {
+    silver_to_coin_data = {
         'csrf_token': '',
         'csrf': ''
     }
