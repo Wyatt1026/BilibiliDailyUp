@@ -52,7 +52,6 @@ class Bilibili:
         for x in range(0, insert_num):
             if strict_mode:
                 while 1:
-
                     coin_res = self.insert_coins()
                     if success_count == 5:
                         break
@@ -60,8 +59,8 @@ class Bilibili:
                         success_count += 1
                     else:
                         fail_count += 1
+                    self.log_and_push(f'当前投币成功{success_count},失败{fail_count}次')
                     time.sleep(1)
-                self.log_and_push(f'当前投币成功{success_count},失败{fail_count}次')
             else:
                 self.insert_coins()
             time.sleep(1)
