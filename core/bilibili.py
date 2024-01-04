@@ -129,9 +129,9 @@ class Bilibili:
         if config.SILVER2COIN_OR_NOT and self.bilibili_http.inquire_live_info() > 700:
             silver_to_coin_res = self.bilibili_http.silver_to_coin()
             if silver_to_coin_res.get('status'):
-                self.log_and_push(f'转换成功～剩余瓜子{silver_to_coin_res.get('msg')}')
+                self.log_and_push(f"转换成功～剩余瓜子{silver_to_coin_res.get('msg')}")
             else:
-                self.log_and_push(f'转换失败-{silver_to_coin_res.get('msg')}')
+                self.log_and_push(f"转换失败-{silver_to_coin_res.get('msg')}")
         else:
             self.log_and_push('银瓜子转换币:跳过~')
 
