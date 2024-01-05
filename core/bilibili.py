@@ -49,21 +49,21 @@ class Bilibili:
         self.log_and_push(f'本次投币任务数量:{insert_num}')
         success_count = 0
         fail_count = 0
-        for x in range(0, insert_num):
-            if strict_mode:
-                while 1:
-                    coin_res = self.insert_coins()
-                    if success_count == 5:
-                        break
-                    if coin_res:
-                        success_count += 1
-                    else:
-                        fail_count += 1
-                    self.log_and_push(f'当前投币成功{success_count},失败{fail_count}次')
-                    time.sleep(1)
-            else:
+        if strict_mode:
+            while 1:
+                coin_res = self.insert_coins()
+                if success_count == 5:
+                    break
+                if coin_res:
+                    success_count += 1
+                else:
+                    fail_count += 1
+                self.log_and_push(f'当前投币成功{success_count},失败{fail_count}次')
+                time.sleep(1)
+        else:
+            for x in range(0, insert_num):
                 self.insert_coins()
-            time.sleep(1)
+                time.sleep(1)
         self.log_and_push(f'每日投币:完成~获得{insert_num * 10}点经验值')
 
     def do_share_video(self):
