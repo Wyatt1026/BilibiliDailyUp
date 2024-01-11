@@ -52,7 +52,7 @@ class Bilibili:
         if strict_mode:
             while 1:
                 coin_res = self.insert_coins()
-                if success_count == 5:
+                if success_count == 5 or fail_count == 5:
                     break
                 if coin_res:
                     success_count += 1
