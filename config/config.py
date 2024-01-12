@@ -3,10 +3,10 @@ The config for this script, you can read the description in README.md
 """
 
 LIKE_OR_NOT = True
-#投币时是否点赞
+# 投币时是否点赞
 
 USE_ENVIRONMENT_VARIABLE = False
-#从环境变量中读取CK 确保已经设置环境变量BILIBILI 只支持单个账号
+# 从环境变量中读取CK 确保已经设置环境变量BILIBILI 只支持单个账号
 
 COIN_OR_NOT = True
 # 是否投币
@@ -31,10 +31,8 @@ UID_LIST = ['473837611', '1131457022', '433587902', '2026561407', '50329118']
 # 新华网 人民日报 央视频  王冰冰 英雄联盟赛事
 
 COOKIE_LIST = [
-    r"",
-    # 示例，以分号+空格分割，否则会出错
-    # r"DedeUserID=xxxx; SESSDATA=xxxx; bili_jct=xxxx",
-    ]
+    r"cookie here"
+]
 # Bilibili的COOKIE获取的方法见README.md 支持多账号
 
 PUSH_OR_NOT = False
@@ -42,17 +40,16 @@ TOKEN = ''
 # PUSH PLUS的TOKEN 官网为https://www.pushplus.plus
 
 WECHAT_PUST_OR_NOT = False
-#默认关闭企业微信推送
+# 默认关闭企业微信推送
 
-WECHAT_ID=""
-#企业ID
-WECHAT_SECRET=""
-#企业应用secret
-WECHAT_APP_ID=""
-#企业应用的id
+WECHAT_ID = ""
+# 企业ID
+WECHAT_SECRET = ""
+# 企业应用secret
+WECHAT_APP_ID = ""
+# 企业应用的id
 # 企业应用推送 文档https://developer.work.weixin.qq.com/document/path/90236
 
 SERVER_PUSH_OR_NOT = False
-SERVER_KEY=""
+SERVER_KEY = ""
 # 是否开启sever酱,有填写则推送,空字符串则不推送 https://sct.ftqq.com/sendkey获取key
-
