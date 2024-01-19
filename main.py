@@ -18,5 +18,6 @@ if __name__ == '__main__':
         ck = environ.get('BILIBILI')
         if not ck:
             print("未设置BILIBILI这个环境变量 任务终止")
-        bilibili = Bilibili(ck)
-        bilibili.go()
+        else:
+            bilibili = Bilibili(ck)
+            bilibili.go()
