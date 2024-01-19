@@ -3,7 +3,6 @@ formate the data  output in terminal
 """
 
 import time
-from random import randint
 
 
 def time_f(timestamp):
