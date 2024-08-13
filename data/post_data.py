@@ -12,11 +12,16 @@ class PostData(Enum):
         AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4728.0 Safari/537.36 Edg/98.0.1093.6"}
 
     insert_coin_headers = {
+        'authority': 'api.bilibili.com',
+        'method': 'POST',
+        'path': '/x/web-interface/coin/add',
+        'scheme': 'https',
         'accept': 'application/json, text/plain, */*',
         'accept-language': 'zh-CN,zh;q=0.9',
         'content-length': '94',
         'content-type': 'application/x-www-form-urlencoded',
         'cookie': '',
+        'priority':'u=1, i',
         'origin': 'https://www.bilibili.com',
         'referer': 'https://www.bilibili.com/video/BV1MT411G7fG?vd_source=1970993e2eff4af7be029aefcfa468b8',
         'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="102", "Google Chrome";v="102"',
@@ -40,16 +45,16 @@ class PostData(Enum):
         'scheme': 'https',
         'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
         'accept-language': 'zh-CN,zh;q=0.9',
-        'cache-control': 'max-age=0',
         'cookie': '',
+        'origin':'https://space.bilibili.com',
+        'priority':'u=1, i',
+        'referer':'https://space.bilibili.com/268941858/video',
         'sec-ch-ua': '"Chromium";v="106", "Google Chrome";v="106", "Not;A=Brand";v="99"',
         'sec-ch-ua-mobile': '?0',
         'sec-ch-ua-platform': "macOS",
         'sec-fetch-dest': 'document',
         'sec-fetch-mode': 'navigate',
         'sec-fetch-site': 'none',
-        'sec-fetch-user': '?1',
-        'upgrade-insecure-requests': '1',
         'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36'
     }
     para_headers = {
@@ -67,6 +72,24 @@ class PostData(Enum):
         'sec-fetch-user': '?1',
         'upgrade-insecure-requests': '1',
         'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+    },
+    live_sign_headers = {
+        'authority': 'api.bilibili.com',
+        'method': 'GET',
+        'path': '/xlive/web-ucenter/v1/sign/DoSign',
+        'scheme': 'https',
+        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        'accept-language': 'zh-CN,zh;q=0.9',
+        'cookie': '',
+        'origin':'https://space.bilibili.com',
+        'priority':'u=1, i',
+        'sec-ch-ua': '"Chromium";v="106", "Google Chrome";v="106", "Not;A=Brand";v="99"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': "macOS",
+        'sec-fetch-dest': 'document',
+        'sec-fetch-mode': 'navigate',
+        'sec-fetch-site': 'none',
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36'
     }
 
     watch_video_data = {
@@ -82,8 +105,12 @@ class PostData(Enum):
         'aid': '',
         'multiply': 1,
         'select_like': 1,
-        'cross_domain': 'true',
-        'csrf': ''
+        'cross_domain': True,
+        'eab_x': 2,
+        'ramval': 0,
+        'source': 'web_normal',
+        'ga': 1,
+        'csrf': '',
     }
     silver_to_coin_data = {
         'csrf_token': '',

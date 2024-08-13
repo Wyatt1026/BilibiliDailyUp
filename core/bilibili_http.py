@@ -1,3 +1,5 @@
+import time
+
 import requests
 import random
 
@@ -22,6 +24,7 @@ class BilibiliHttp:
         check the cookie is valid or not
         """
         ck_status_res = self.session.get(url=self.api.coin_url.value,
+                                        headers=self.post_data.video_list_headers.value,
                                          cookies=self.ck).json()
         code = ck_status_res.get('code', 0)
         # code equal 0 means cookie is valid
@@ -110,11 +113,15 @@ class BilibiliHttp:
         insert_coin_res = self.session.post(
             url=self.api.insert_coins_url.value, headers=insert_coin_headers,
             data=insert_coin_data, cookies=self.ck).json()
+        # print(insert_coin_res)
         like = insert_coin_res.get('data', {}).get('like', False)
         return like
 
     def live_sign(self) -> str:
+        headers = self.post_data.live_sign_headers.value
+        headers['cookie'] = self.ck_str
         res = self.session.get(url=self.api.live_sign_url.value,
+                               headers=headers,
                                cookies=self.ck).json()
         if res.get('code') == 0:
             text = res.get('data', {}).get('text', '获得奖励信息出错啦~')
@@ -169,6 +176,7 @@ class BilibiliHttp:
         random_uid = random.choice(uid_list)
         headers = self.post_data.video_list_headers.value
         query = get_query(ck=self.ck_str, mid=random_uid, ps=30, pn=1)
+        print(query)
         headers['path'] = f'/x/space/wbi/arc/search?{query}'
         headers['cookie'] = self.ck_str
         get_video_list_url = self.api.get_video_list_url.value.format(query)
