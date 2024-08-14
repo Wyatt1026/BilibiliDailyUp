@@ -37,7 +37,7 @@ def enc_wbi(params: dict, img_key: str, sub_key: str):
 
 def get_wbi_keys(ck):
     headers = PostData.para_headers.value
-    headers['cookie'] = ck
+    headers['cookie'] =ck
     resp = requests.get(url=Api.nav_url.value, headers=headers)
     resp.raise_for_status()
     json_content = resp.json()
