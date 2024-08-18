@@ -24,7 +24,7 @@ class BilibiliHttp:
         check the cookie is valid or not
         """
         ck_status_res = self.session.get(url=self.api.coin_url.value,
-                                        headers=self.post_data.video_list_headers.value,
+                                         headers=self.post_data.video_list_headers.value,
                                          cookies=self.ck).json()
         code = ck_status_res.get('code', 0)
         # code equal 0 means cookie is valid
@@ -142,7 +142,10 @@ class BilibiliHttp:
         silver_data = self.post_data.silver_to_coin_data.value
         silver_data['csrf'] = get_csrf(self.ck_str)
         silver_data['csrf_token'] = get_csrf(self.ck_str)
+        header = self.post_data.para_headers.value
+        header['cookie'] = self.ck_str
         res = self.session.post(url=self.api.silver_to_coin_url.value,
+                                headers=header,
                                 cookies=self.ck, data=silver_data).json()
         if not res.get('code', 0):
             silver = res.get('data', {}).get('silver', 0)
