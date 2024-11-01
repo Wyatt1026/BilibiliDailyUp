@@ -25,13 +25,14 @@ STRICT_MODE = True
 NUM_MODE = False
 # 该模式与严格模式互斥,开启此模式,投币只会投COIN_NUM次,无论成功失败
 
-UID_LIST = ['473837611', '1131457022', '433587902', '2026561407', '50329118']
+UID_LIST = ['431316421', '3546766586678158', '1794984662']
 # 投币UP主的ID号,如果不修改，默认将用上面这个列表里的,可以选择自己喜欢的UP主
 # 获取UID的方法见README.md
 # 新华网 人民日报 央视频  王冰冰 英雄联盟赛事
 
 COOKIE_LIST = [
-    r""
+    r"buvid3=35264C13-CFB2-DE38-C44A-F54D3C5C916610134infoc; b_nut=1728960610; _uuid=9C45FEAE-E5A3-8E12-F62A-E3833E519E10410765infoc; enable_web_push=DISABLE; buvid4=963F0DC0-0AB6-6A0F-26B0-B3BAEB3EB9C911538-024101502-pTl/QoSssHMwHTofBBTPX9jnzcD5LppC+eKteDDBvQMpv2UQ417hO0dZBXyQn9vz; buvid_fp=8741fd7b610676e58a7b650b22553b7a; DedeUserID=3546777600919923; DedeUserID__ckMd5=52f8c8280d7b52ac; header_theme_version=CLOSE; CURRENT_FNVAL=4048; home_feed_column=5; rpdid=0zbfvSbQGu|qxpYJV8m|2kf|3w1T0yl1; bili_ticket=eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mjk0Nzc1MzksImlhdCI6MTcyOTIxODI3OSwicGx0IjotMX0.zlyV3RZw3Mdo4FBeDjNANC_67wRqfThL0qXCopeEM0o; bili_ticket_expires=1729477479; SESSDATA=0eec1500%2C1744772199%2C4e320%2Aa1CjAcaWryw0yCzGU4OpY_X7vRWXwKzB-n9f9b5ZWiubnHq1Dpz_9q5vhkwVfxSGrEVrUSVnV1YlE4bGFTWTlYdzdkaUtZSUE5ZmlERHJzdlduYjJtQjB1MlZPQU5Rb2tONGlaaXlHdF9VOXRub2pWalRmOWFLRldPdGNsbjViZnpNNHBLUDRneW9nIIEC; bili_jct=d7417ad7f00061cf4b77ee277319ed57; sid=8vbo0khc; b_lsid=1010BB394D_192ACD2896C; bmg_af_switch=1; bmg_src_def_domain=i0.hdslb.com; bp_t_offset_3546777600919923=990582521185959936; browser_resolution=1777-1435",
+    r"buvid3=10879112-092E-AC02-E3E1-727C505B208D98619infoc; b_nut=1727862298; _uuid=12F63F68-D1078-71075-36FD-8685D7DE753699400infoc; enable_web_push=DISABLE; buvid4=96E59510-68D8-BE3F-23D6-F93CBA76DD9602285-024100209-xBCrltfYy0zks+MDWCytQutrofaTRg3Pzh/ITb6sR37FxMTLR+u91LRwLoonC68v; buvid_fp=dfe12467d3b82339c01923765a568f89; header_theme_version=CLOSE; DedeUserID=3546776470555432; DedeUserID__ckMd5=93636570af93a5ee; CURRENT_FNVAL=4048; rpdid=0zbfvSbQGu|qxp9hzR0|vO8|3w1T0i3g; CURRENT_QUALITY=80; bp_t_offset_3546776470555432=988118541397917696; b_lsid=5CEEC5610_192E5BC7E36; SESSDATA=bc2662c4%2C1745983194%2Ca6835%2Ab1CjDLOT-7p77q-YLu1omD2YkqFHbuBYgxPhhyHgxaZgyMlzKI7v6Dyga_np1RCIz9wHUSVjN4Wno0cm9FZEpaMlExQ1l3eXFXZ2dwcDRNM0N0QzZRM2hUMVo0dm9YemdrSWxsZGR4Uk1HTml1M2NWUmp1dGFwajl2aUlUV0lwazc2SGRsWVpiRWR3IIEC; bili_jct=7344dc4e19b6fd2ee623033635237300; sid=pt5ytlgk; bili_ticket=eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzA2OTAzOTgsImlhdCI6MTczMDQzMTEzOCwicGx0IjotMX0.oPGWyNx7rgTaR6ul4Dj9tpaTGOBbKlHff_-IhhyU34Y; bili_ticket_expires=1730690338; home_feed_column=4; browser_resolution=400-888"
 ]
 # Bilibili的COOKIE获取的方法见README.md 支持多账号
 
@@ -39,14 +40,14 @@ PUSH_OR_NOT = False
 TOKEN = ''
 # PUSH PLUS的TOKEN 官网为https://www.pushplus.plus
 
-WECHAT_PUST_OR_NOT = False
+WECHAT_PUST_OR_NOT = True
 # 默认关闭企业微信推送
 
-WECHAT_ID = ""
+WECHAT_ID = "wwf8996175e40b25ac"
 # 企业ID
-WECHAT_SECRET = ""
+WECHAT_SECRET = "cUzqXTv-ycuxUkGoqUFoi3HLLo9Xd50GNPmKtC1lxLM"
 # 企业应用secret
-WECHAT_APP_ID = ""
+WECHAT_APP_ID = "1000002"
 # 企业应用的id
 # 企业应用推送 文档https://developer.work.weixin.qq.com/document/path/90236
 
