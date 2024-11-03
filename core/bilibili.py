@@ -108,19 +108,13 @@ class Bilibili:
         if not cookie_status:
             self.log_and_push("cookie 无效任务终止...")
             return
-        self.log_and_push('cookie有效即将开始查询任务……')
+        self.log_and_push('cookie有效即将开始任务……')
+        
+        self.log_and_push('=========以下是个人信息=========')
+        user_info = self.bilibili_http.get_info()
+        self.log_and_push(user_info)
+        
         self.log_and_push('=========以下是任务信息=========')
-        inquire_job_res = self.bilibili_http.inquire_job()
-        job_handlers = {
-            'login': self.handle_login,
-            'watch': self.handle_watch_video,
-            'insert': self.handle_insert_coin,
-            'share': self.handle_share_video,
-        }
-        for job_name, job_status in inquire_job_res.items():
-            handler = job_handlers.get(job_name)
-            handler(job_status)
-
         self.log_and_push('=========直播签到========')
         live_sign_res = self.bilibili_http.live_sign()
         self.log_and_push(live_sign_res)
@@ -143,10 +137,24 @@ class Bilibili:
                 self.log_and_push("漫画签到: 完成~")
             else:
                 self.log_and_push("漫画签到: 失败~")
-
-        self.log_and_push('=========以下是个人信息=========')
-        user_info = self.bilibili_http.get_info()
-        self.log_and_push(user_info)
+        # 以下是登陆，观看视频，分享，投币任务
+        inquire_job_res = self.bilibili_http.inquire_job()
+        job_handlers = {
+            'login': self.handle_login,
+            'watch': self.handle_watch_video,
+            'share': self.handle_share_video,
+            'insert': self.handle_insert_coin,
+            
+        }
+        for job_name, job_status in inquire_job_res.items():
+            handler = job_handlers.get(job_name)
+            handler(job_status)
+        # 打印任务结果
+        time.sleep(20)
+        inquire_job_res = self.bilibili_http.inquire_job()
+        self.log_and_push(inquire_job_res)
+        
+        
 
     def go(self) -> None:
         """
