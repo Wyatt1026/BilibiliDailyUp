@@ -138,6 +138,7 @@ class Bilibili:
             else:
                 self.log_and_push("漫画签到: 失败~")
         # 以下是登陆，观看视频，分享，投币任务
+        self.log_and_push('=========登陆，观看视频，分享，投币任务情况========')
         inquire_job_res = self.bilibili_http.inquire_job()
         job_handlers = {
             'login': self.handle_login,
