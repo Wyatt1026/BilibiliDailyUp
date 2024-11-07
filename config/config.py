@@ -9,7 +9,7 @@ LIKE_OR_NOT = True
 USE_ENVIRONMENT_VARIABLE = False
 # 从环境变量中读取CK 确保已经设置环境变量BILIBILI 只支持单个账号
 
-COIN_OR_NOT = True
+COIN_OR_NOT = False
 # 是否投币
 
 COIN_NUM = 1
