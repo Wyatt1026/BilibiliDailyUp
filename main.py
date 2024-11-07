@@ -12,8 +12,8 @@ if __name__ == '__main__':
     cookies = os.environ.get('COOKIES')
     ck_list = cookies.split(",")
     
-        for ck in ck_list:
-            bilibili = Bilibili(ck)
-            bilibili.go()
+    for ck in ck_list:
+        bilibili = Bilibili(ck)
+        bilibili.go() 
         
     
