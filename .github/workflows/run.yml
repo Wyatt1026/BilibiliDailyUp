@@ -25,3 +25,8 @@ jobs:
 
     - name: Run sign-in script
       run: python main.py
+      env:
+        COOKIES: ${{ secrets.COOKIES }}
+        WECHAT_ID: ${{ secrets.WECHAT_ID }}
+        WECHAT_SECRET: ${{ secrets.WECHAT_SECRET }}
+        WECHAT_APP_ID: ${{ secrets.WECHAT_APP_ID }}
