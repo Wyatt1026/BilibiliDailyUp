@@ -12,6 +12,8 @@
 >不需要推送的，在config文件里设置。
 >需要设置的参数：COOKIES,WECHAT_ID,WECHAT_SECRET,WECHAT_APP_ID
 
+***
+
 >2023/05/25 添加了对于新的API的支持 有能力的可以自己添加功能
 
 >2023/06/14 添加了漫画自动签到功能 增加Sever酱推送和企业微信应用推送
