@@ -1,4 +1,4 @@
-## 哔哩哔哩Bilibili升级脚本-Action/青龙🐉/云函数☁
+## 哔哩哔哩Bilibili升级脚本 - Github Action/青龙🐉/云函数☁
 
 
 ## 更新日志
