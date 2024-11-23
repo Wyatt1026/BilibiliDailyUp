@@ -129,14 +129,14 @@ class Bilibili:
         else:
             self.log_and_push('银瓜子转换币:跳过~')
 
-        # self.log_and_push('=========漫画签到情况========')
-        # if self.bilibili_http.check_comics_sign():
-        #     self.log_and_push("漫画签到:当天已签到~")
-        # else:
-        #     if self.bilibili_http.comics_sign():
-        #         self.log_and_push("漫画签到: 完成~")
-        #     else:
-        #         self.log_and_push("漫画签到: 失败~")
+        self.log_and_push('=========漫画签到情况========')
+        if self.bilibili_http.check_comics_sign():
+            self.log_and_push("漫画签到:当天已签到~")
+        else:
+            if self.bilibili_http.comics_sign():
+                self.log_and_push("漫画签到: 完成~")
+            else:
+                self.log_and_push("漫画签到: 失败~")
         # 以下是登陆，观看视频，分享，投币任务
         self.log_and_push('=========登陆，观看视频，分享，投币任务情况========')
         inquire_job_res = self.bilibili_http.inquire_job()
