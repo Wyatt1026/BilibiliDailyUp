@@ -23,7 +23,7 @@ class PostData(Enum):
         'cookie': '',
         'priority': 'u=1, i',
         'origin': 'https://www.bilibili.com',
-        'referer': 'https://www.bilibili.com/video/BV1MT411G7fG?vd_source=1970993e2eff4af7be029aefcfa468b8',
+        'referer': 'https://www.bilibili.com/video/BV19iSoYEEmp/?spm_id_from=333.999.0.0&vd_source=5c112284a27b3ea53056fcb5622c2c75',
         'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="102", "Google Chrome";v="102"',
         'sec-ch-ua-mobile': '?0',
         'sec-ch-ua-platform': '"macOS"',
@@ -34,8 +34,9 @@ class PostData(Enum):
 
     }
     comics_sign_header = {
-        "Cookie": '',
-        "Content-Type": "application/x-www-form-urlencoded"
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie': '',
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36',
     }
 
     video_list_headers = {
@@ -48,7 +49,7 @@ class PostData(Enum):
         'cookie': '',
         'origin': 'https://space.bilibili.com',
         'priority': 'u=1, i',
-        'referer': 'https://space.bilibili.com/268941858/video',
+        'referer': 'https://space.bilibili.com/431316421/video',
         'sec-ch-ua': '"Chromium";v="106", "Google Chrome";v="106", "Not;A=Brand";v="99"',
         'sec-ch-ua-mobile': '?0',
         'sec-ch-ua-platform': "macOS",

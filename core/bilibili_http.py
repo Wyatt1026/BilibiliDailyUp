@@ -187,12 +187,17 @@ class BilibiliHttp:
         return video_list
 
     def watch_video(self, bvid: str) -> bool:
-        watch_time = random.randint(30, 60)
+        # watch_time = random.randint(30, 60)
         watch_video_data = self.post_data.watch_video_data.value
         watch_video_data['bvid'] = bvid
-        watch_video_data['played_time'] = str(watch_time)
+        # watch_video_data['played_time'] = str(watch_time)
         watch_video_data['csrf'] = get_csrf(self.ck_str)
-        watch_video_res = self.session.post(
-            url=self.api.watch_video_url.value, data=watch_video_data, cookies=self.ck).json()
-        code = watch_video_res.get('code', 1)
+        try:
+            watch_video_res = self.session.post(
+            url=self.api.watch_video_url.value, data=watch_video_data, cookies=self.ck, headers=self.post_data.headers.value).json()
+            print(watch_video_res)
+            code = watch_video_res.get('code', 1)
+        except Exception as e:
+            print(e)
+            pass
         return code == 0
