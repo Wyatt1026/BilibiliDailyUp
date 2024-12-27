@@ -9,8 +9,11 @@ from config import config
 import os
 
 if __name__ == '__main__':
-    cookies = os.environ.get('COOKIES')
-    ck_list = cookies.split(",")
+    if config.USE_ENVIRONMENT_VARIABLE:
+        cookies = os.environ.get('COOKIES')
+        ck_list = cookies.split(",")
+    else:
+        ck_list = config.COOKIE_LIST
     
     for ck in ck_list:
         bilibili = Bilibili(ck)
