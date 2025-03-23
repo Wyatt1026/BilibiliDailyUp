@@ -1,7 +1,6 @@
 """
 The config for this script, you can read the description in README.md
 """
-import os
 
 LIKE_OR_NOT = True
 # 投币时是否点赞
@@ -31,7 +30,7 @@ UID_LIST = ['473837611', '1131457022', '433587902', '2026561407', '50329118']
 # 获取UID的方法见README.md
 
 COOKIE_LIST = [
-    r"buvid3=9861459B-C6AE-30F1-1C0A-E44A874F3CCA38140infoc; b_nut=1709894038; _uuid=103753A810-FD79-FDBC-1010BD-5107E5BBD29B339279infoc; buvid4=AD422B7D-5D49-7758-7152-2C14F28DAC4138921-024030810-3%2Fdq6MhSXavtbsTZPUsYofldkmDVrKET%2Ffgp91VD6KkSjOhPw9ziZNVwGaySO80G; rpdid=0zbfVGeOUx|X0AFTDpw|2AS|3w1RIxy7; enable_web_push=DISABLE; header_theme_version=CLOSE; hit-dyn-v2=1; LIVE_BUVID=AUTO9517099011483532; FEED_LIVE_VERSION=V_WATCHLATER_PIP_WINDOW3; CURRENT_QUALITY=80; buvid_fp_plain=undefined; go-back-dyn=0; fingerprint=177532d1718af28f2ff1468460bdda48; buvid_fp=177532d1718af28f2ff1468460bdda48; PVID=1; bili_ticket=eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzUzMDQwNzEsImlhdCI6MTczNTA0NDgxMSwicGx0IjotMX0.T5mTLKJNtkz_5wo2PoChoTA3q1QUvJVNAe_gCo7aRt8; bili_ticket_expires=1735304011; SESSDATA=aa96ed54%2C1750606574%2Cd5f1e%2Ac1CjAeODR7OTd3smz2pDTYHpV3DKPbJHH3DQ8qksuxG9G3m7rl0lOLYW5pVKAqCkLwBtcSVnJ5aUJwTlV4Tnp6YzBTZWJ6ay1aVzB3cnRDRS13YTRkanNVWUM0dms2YTgyVW4zLTYtU0hPWjdzWjZLdUhPd0t3eklDN0I1UU96OUItbnAtTjBNQ1lBIIEC; bili_jct=266ca16113aa2cb417ddcff21279c512; DedeUserID=312026488; DedeUserID__ckMd5=27339ecc5e827bcd; bp_t_offset_312026488=1014901081282445312; home_feed_column=4; browser_resolution=1192-902; b_lsid=8546EE110_194021E3429; CURRENT_FNVAL=2000; sid=g7ijxs54",
+    r""
 ]
 # Bilibili的COOKIE获取的方法见README.md 支持多账号
 
@@ -42,11 +41,11 @@ TOKEN = ''
 WECHAT_PUST_OR_NOT = True
 # 默认关闭企业微信推送
 
-WECHAT_ID = os.environ.get('WECHAT_ID')
+WECHAT_ID = ""
 # 企业ID
-WECHAT_SECRET = os.environ.get('WECHAT_SECRET')
+WECHAT_SECRET = ""
 # 企业应用secret
-WECHAT_APP_ID = os.environ.get('WECHAT_APP_ID')
+WECHAT_APP_ID = ""
 # 企业应用的id
 # 企业应用推送 文档https://developer.work.weixin.qq.com/document/path/90236
 
